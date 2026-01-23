@@ -1,3 +1,5 @@
+import { FoodAttributes } from './attributes';
+
 export type FoodCategory = "breakfast" | "main" | "snack" | "dessert";
 
 export type Food = {
@@ -7,4 +9,5 @@ export type Food = {
   category: FoodCategory;
   tags: string[];
   image: string;
+  attributes?: FoodAttributes;
 };
