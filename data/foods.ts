@@ -6,7 +6,7 @@ export const foods: Food[] = [
     name3ar: "7mous",
     nameAr: "حمص",
     category: "breakfast",
-    tags: ["ra7a", "se7i", "khafeef"],
+    tags: ["comfy", "healthy", "light"],
     image: "/images/hummus.jpg",
   },
   {
@@ -14,7 +14,7 @@ export const foods: Food[] = [
     name3ar: "Foul",
     nameAr: "فول",
     category: "breakfast",
-    tags: ["ra7a", "se7i", "shab3an"],
+    tags: ["comfy", "healthy", "beshabe3"],
     image: "/images/foul.jpg",
   },
   {
@@ -22,7 +22,7 @@ export const foods: Food[] = [
     name3ar: "Man2oushe",
     nameAr: "مناقيش",
     category: "breakfast",
-    tags: ["sare3", "mashhour", "ra7a"],
+    tags: ["sare3", "trendy", "comfy"],
     image: "/images/manoushe.jpg",
   },
   {
@@ -30,7 +30,7 @@ export const foods: Food[] = [
     name3ar: "Fattoush",
     nameAr: "فتوش",
     category: "main",
-    tags: ["taza", "se7i", "khafeef"],
+    tags: ["fresh", "healthy", "light"],
     image: "/images/fattoush.jpg",
   },
   {
@@ -38,7 +38,7 @@ export const foods: Food[] = [
     name3ar: "Tabbouleh",
     nameAr: "تبولة",
     category: "main",
-    tags: ["taza", "se7i", "khafeef"],
+    tags: ["fresh", "healthy", "light"],
     image: "/images/tabbouleh.jpg",
   },
   {
@@ -46,7 +46,7 @@ export const foods: Food[] = [
     name3ar: "Kibbeh",
     nameAr: "كبة",
     category: "main",
-    tags: ["ta2lidi", "te2il", "mashhour"],
+    tags: ["3arabe", "desem", "trendy"],
     image: "/images/kibbeh.jpg",
   },
   {
@@ -54,7 +54,7 @@ export const foods: Food[] = [
     name3ar: "Shawarma",
     nameAr: "شاورما",
     category: "main",
-    tags: ["mashhour", "sare3", "shab3an"],
+    tags: ["trendy", "sare3", "beshabe3"],
     image: "/images/shawarma.jpg",
   },
   {
@@ -62,7 +62,7 @@ export const foods: Food[] = [
     name3ar: "Falafel",
     nameAr: "فلافل",
     category: "main",
-    tags: ["mashhour", "sare3", "shab3an"],
+    tags: ["trendy", "sare3", "beshabe3"],
     image: "/images/falafel.jpg",
   },
   {
@@ -70,7 +70,7 @@ export const foods: Food[] = [
     name3ar: "Kafta",
     nameAr: "كفتة",
     category: "main",
-    tags: ["ta2lidi", "te2il", "mashhour"],
+    tags: ["3arabe", "desem", "trendy"],
     image: "/images/kafta.jpg",
   },
   {
@@ -78,7 +78,7 @@ export const foods: Food[] = [
     name3ar: "Mjaddara",
     nameAr: "مجدرة",
     category: "main",
-    tags: ["ra7a", "ta2lidi", "shab3an"],
+    tags: ["comfy", "3arabe", "beshabe3"],
     image: "/images/mujaddara.jpg",
   },
   {
@@ -86,7 +86,7 @@ export const foods: Food[] = [
     name3ar: "Sayadieh",
     nameAr: "صيادية",
     category: "main",
-    tags: ["ta2lidi", "se7i", "te2il"],
+    tags: ["3arabe", "healthy", "desem"],
     image: "/images/sayadieh.jpg",
   },
   {
@@ -94,7 +94,7 @@ export const foods: Food[] = [
     name3ar: "Warak 3enab",
     nameAr: "ورق عنب",
     category: "main",
-    tags: ["ta2lidi", "ra7a", "te2il"],
+    tags: ["3arabe", "comfy", "desem"],
     image: "/images/warak-enab.jpg",
   },
   {
@@ -102,7 +102,7 @@ export const foods: Food[] = [
     name3ar: "Baba Ghanoush",
     nameAr: "بابا غنوج",
     category: "main",
-    tags: ["ra7a", "se7i", "khafeef"],
+    tags: ["comfy", "healthy", "light"],
     image: "/images/baba-ghanoush.jpg",
   },
   {
@@ -110,7 +110,7 @@ export const foods: Food[] = [
     name3ar: "Moussaka",
     nameAr: "مسقعة",
     category: "main",
-    tags: ["ra7a", "ta2lidi", "shab3an"],
+    tags: ["comfy", "3arabe", "beshabe3"],
     image: "/images/moussaka.jpg",
   },
   {
@@ -118,7 +118,7 @@ export const foods: Food[] = [
     name3ar: "Fattet 7mous",
     nameAr: "فتة حمص",
     category: "main",
-    tags: ["ra7a", "ta2lidi", "shab3an"],
+    tags: ["comfy", "3arabe", "beshabe3"],
     image: "/images/fattet-hummus.jpg",
   },
   {
@@ -126,7 +126,7 @@ export const foods: Food[] = [
     name3ar: "Sfiha",
     nameAr: "صفيحة",
     category: "snack",
-    tags: ["mashhour", "sare3", "khafeef"],
+    tags: ["trendy", "sare3", "light"],
     image: "/images/sfiha.jpg",
   },
   {
@@ -134,7 +134,7 @@ export const foods: Food[] = [
     name3ar: "Sambousek",
     nameAr: "سمبوسك",
     category: "snack",
-    tags: ["sare3", "khafeef", "mashhour"],
+    tags: ["sare3", "light", "trendy"],
     image: "/images/sambousek.jpg",
   },
   {
@@ -142,7 +142,7 @@ export const foods: Food[] = [
     name3ar: "Knefeh",
     nameAr: "كنافة",
     category: "dessert",
-    tags: ["7elw", "mashhour", "ta2lidi"],
+    tags: ["sweet", "trendy", "3arabe"],
     image: "/images/knefeh.jpg",
   },
   {
@@ -150,7 +150,7 @@ export const foods: Food[] = [
     name3ar: "Baklava",
     nameAr: "بقلاوة",
     category: "dessert",
-    tags: ["7elw", "ta2lidi", "khafeef"],
+    tags: ["sweet", "3arabe", "light"],
     image: "/images/baklava.jpg",
   },
   {
@@ -158,7 +158,7 @@ export const foods: Food[] = [
     name3ar: "Ma3moul",
     nameAr: "معمول",
     category: "dessert",
-    tags: ["7elw", "ta2lidi", "khafeef"],
+    tags: ["sweet", "3arabe", "light"],
     image: "/images/maamoul.jpg",
   },
   {
@@ -166,7 +166,7 @@ export const foods: Food[] = [
     name3ar: "3atayef",
     nameAr: "قطايف",
     category: "dessert",
-    tags: ["7elw", "ta2lidi", "mashhour"],
+    tags: ["sweet", "3arabe", "trendy"],
     image: "/images/atayef.jpg",
   },
   {
@@ -174,7 +174,7 @@ export const foods: Food[] = [
     name3ar: "Mloukhieh",
     nameAr: "ملوخية",
     category: "main",
-    tags: ["ra7a", "ta2lidi", "te2il"],
+    tags: ["comfy", "3arabe", "desem"],
     image: "/images/mloukhieh.jpg",
   },
   {
@@ -182,7 +182,7 @@ export const foods: Food[] = [
     name3ar: "Fasoulia",
     nameAr: "فاصوليا",
     category: "main",
-    tags: ["ra7a", "ta2lidi", "shab3an"],
+    tags: ["comfy", "3arabe", "beshabe3"],
     image: "/images/fasoulia.jpg",
   },
 ];
