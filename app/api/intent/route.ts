@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { localIntent } from "@/lib/localIntent";
 
-// Available tags from the food system
+console.log("GEMINI ENABLED:", !!process.env.GEMINI_API_KEY);
+
 // Available tags from the food system
 const AVAILABLE_TAGS = [
   "comfy",     // comfort, relaxing
@@ -21,33 +22,45 @@ const AVAILABLE_TAGS = [
 const AVAILABLE_CATEGORIES = ["breakfast", "main", "snack", "dessert"];
 
 export async function POST(request: NextRequest) {
+  const startTime = Date.now();
   let text = "";
   try {
     const body = await request.json();
     text = body.text || "";
 
     if (!text || typeof text !== "string" || text.trim().length === 0) {
+      const latencyMs = Date.now() - startTime;
       return NextResponse.json(
-        { tags: [], exclude: [] },
+        {
+          tags: [],
+          exclude: [],
+          meta: {
+            input: typeof text === "string" ? text : "",
+            localTags: [],
+            aiTags: [],
+            finalTags: [],
+            source: "none" as const,
+            latencyMs,
+          },
+        },
         { status: 200 }
       );
     }
 
-    // 1. ALWAYS compute localTags first (MANDATORY)
+    // 1. Compute localTags (fast & deterministic)
     const localTags = localIntent(text);
-    console.log("Local tags:", localTags);
 
     let aiTags: string[] = [];
     let aiExclude: string[] = [];
 
-    // 2. Try calling Gemini inside try/catch (optional)
+    // 2. Try calling Gemini for semantic fallback + enrichment
     try {
       if (process.env.GEMINI_API_KEY) {
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-        // Try multiple model names as fallback (some may be deprecated or unavailable)
+        // Try multiple model names as fallback
         const modelNames = [
-          "gemini-2.5-flash",  // This works! Verified via curl
+          "gemini-2.5-flash",
           "gemini-1.5-flash-latest",
           "gemini-1.5-flash",
           "gemini-pro",
@@ -100,40 +113,33 @@ JSON response:`;
 
             responseText = result.response.text().trim();
             modelWorked = true;
-            console.log(`Successfully used model: ${modelName}`);
             break; // Success, exit loop
           } catch (modelError: any) {
-            // If 404, try next model; if other error (429, timeout, etc.), break and fallback
             if (modelError?.status === 404) {
-              console.log(`Model ${modelName} not found (404), trying next...`);
               continue;
             } else {
-              // Rate limit, timeout, or other error - don't try other models
               throw modelError;
             }
           }
         }
 
-        if (!modelWorked) {
-          throw new Error("No available Gemini model found (all returned 404)");
-        }
+        if (modelWorked) {
+          // Try to extract JSON from response
+          try {
+            const cleaned = responseText.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
+            const intent = JSON.parse(cleaned);
 
-        // Try to extract JSON from response
-        try {
-          const cleaned = responseText.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
-          const intent = JSON.parse(cleaned);
+            // Validate and sanitize the response
+            aiTags = Array.isArray(intent.tags)
+              ? intent.tags.filter((tag: string) => AVAILABLE_TAGS.includes(tag))
+              : [];
 
-          // Validate and sanitize the response
-          aiTags = Array.isArray(intent.tags)
-            ? intent.tags.filter((tag: string) => AVAILABLE_TAGS.includes(tag))
-            : [];
-
-          aiExclude = Array.isArray(intent.exclude)
-            ? intent.exclude.filter((cat: string) => AVAILABLE_CATEGORIES.includes(cat))
-            : [];
-        } catch (parseError) {
-          // Swallow parse error, aiTags stays empty
-          console.error("Failed to parse AI response:", parseError);
+            aiExclude = Array.isArray(intent.exclude)
+              ? intent.exclude.filter((cat: string) => AVAILABLE_CATEGORIES.includes(cat))
+              : [];
+          } catch (parseError) {
+            console.error("Failed to parse AI response:", parseError);
+          }
         }
       }
     } catch (error: any) {
@@ -152,25 +158,50 @@ JSON response:`;
       }
     }
 
-    console.log("AI tags:", aiTags);
+    // 3. Merge results: union of localTags and aiTags
+    const combinedTags = Array.from(new Set([...localTags, ...aiTags]));
+    const finalTags = combinedTags.filter((tag: string) => AVAILABLE_TAGS.includes(tag));
 
-    // 3. If Gemini fails, times out, or returns empty → fallback to localTags
-    // Use localTags if available, otherwise use aiTags
-    const finalTags = localTags.length > 0 ? localTags : aiTags;
-    console.log("Final tags:", finalTags);
+    const latencyMs = Date.now() - startTime;
+    const source: "local" | "gemini" | "both" | "none" =
+      finalTags.length === 0
+        ? "none"
+        : localTags.length > 0 && aiTags.length > 0
+          ? "both"
+          : localTags.length > 0
+            ? "local"
+            : "gemini";
 
-    // 4. Return normalized tags only
     return NextResponse.json({
-      tags: finalTags.filter((tag: string) => AVAILABLE_TAGS.includes(tag)),
-      exclude: aiExclude
+      tags: finalTags,
+      exclude: aiExclude,
+      meta: {
+        input: text,
+        localTags,
+        aiTags,
+        finalTags,
+        source,
+        latencyMs,
+      },
     });
   } catch (error) {
-    // Last resort fallback - should never happen, but ensure we never throw
+    // Last resort fallback
     console.error("Unexpected error in intent API:", error);
     const fallbackTags = text ? localIntent(text) : [];
+    const latencyMs = Date.now() - startTime;
+    const tags = fallbackTags.filter((tag: string) => AVAILABLE_TAGS.includes(tag));
+    const source: "local" | "gemini" | "both" | "none" = tags.length > 0 ? "local" : "none";
     return NextResponse.json({
-      tags: fallbackTags.filter((tag: string) => AVAILABLE_TAGS.includes(tag)),
-      exclude: []
+      tags,
+      exclude: [],
+      meta: {
+        input: text,
+        localTags: text ? localIntent(text) : [],
+        aiTags: [],
+        finalTags: tags,
+        source,
+        latencyMs,
+      },
     });
   }
 }
