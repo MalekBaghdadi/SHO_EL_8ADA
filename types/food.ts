@@ -8,6 +8,7 @@ export type Food = {
   nameAr: string;
   category: FoodCategory;
   tags: string[];
-  image: string;
+  image?: string; // @deprecated - use imageKey and resolveFoodImage(food)
+  imageKey: string; // Required for deterministic resolution
   attributes?: FoodAttributes;
 };

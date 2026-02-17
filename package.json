@@ -6,11 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "validate:images": "node scripts/validate-images.mjs",
+    "build": "npm run validate:images && next build"
   },
   "dependencies": {
     "@google/genai": "^1.37.0",
     "@google/generative-ai": "^0.24.1",
+    "framer-motion": "^12.34.0",
     "next": "14.2.5",
     "next.js": "^1.0.3",
     "openai": "^6.16.0",

@@ -8,6 +8,7 @@ export const foods: Food[] = [
     category: "breakfast",
     tags: ["comfy", "healthy", "light"],
     image: "/images/hummus.jpg",
+    imageKey: "hummus",
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ export const foods: Food[] = [
     category: "breakfast",
     tags: ["comfy", "healthy", "beshabe3"],
     image: "/images/foul.jpg",
+    imageKey: "foul",
   },
   {
     id: 3,
@@ -24,6 +26,7 @@ export const foods: Food[] = [
     category: "breakfast",
     tags: ["sare3", "trendy", "comfy"],
     image: "/images/manoushe.jpg",
+    imageKey: "manoushe",
   },
   {
     id: 4,
@@ -32,6 +35,7 @@ export const foods: Food[] = [
     category: "main",
     tags: ["fresh", "healthy", "light"],
     image: "/images/fattoush.jpg",
+    imageKey: "fattoush",
   },
   {
     id: 5,
@@ -40,6 +44,7 @@ export const foods: Food[] = [
     category: "main",
     tags: ["fresh", "healthy", "light"],
     image: "/images/tabbouleh.jpg",
+    imageKey: "tabbouleh",
   },
   {
     id: 6,
@@ -48,6 +53,7 @@ export const foods: Food[] = [
     category: "main",
     tags: ["3arabe", "desem", "trendy"],
     image: "/images/kibbeh.jpg",
+    imageKey: "kibbeh",
   },
   {
     id: 7,
@@ -56,6 +62,7 @@ export const foods: Food[] = [
     category: "main",
     tags: ["trendy", "sare3", "beshabe3"],
     image: "/images/shawarma.jpg",
+    imageKey: "shawarma",
   },
   {
     id: 8,
@@ -64,6 +71,7 @@ export const foods: Food[] = [
     category: "main",
     tags: ["trendy", "sare3", "beshabe3"],
     image: "/images/falafel.jpg",
+    imageKey: "falafel",
   },
   {
     id: 9,
@@ -72,6 +80,7 @@ export const foods: Food[] = [
     category: "main",
     tags: ["3arabe", "desem", "trendy"],
     image: "/images/kafta.jpg",
+    imageKey: "kafta",
   },
   {
     id: 10,
@@ -80,6 +89,7 @@ export const foods: Food[] = [
     category: "main",
     tags: ["comfy", "3arabe", "beshabe3"],
     image: "/images/mujaddara.jpg",
+    imageKey: "mujaddara",
   },
   {
     id: 11,
@@ -88,6 +98,7 @@ export const foods: Food[] = [
     category: "main",
     tags: ["3arabe", "healthy", "desem"],
     image: "/images/sayadieh.jpg",
+    imageKey: "sayadieh",
   },
   {
     id: 12,
@@ -96,6 +107,7 @@ export const foods: Food[] = [
     category: "main",
     tags: ["3arabe", "comfy", "desem"],
     image: "/images/warak-enab.jpg",
+    imageKey: "warak-enab",
   },
   {
     id: 13,
@@ -104,6 +116,7 @@ export const foods: Food[] = [
     category: "main",
     tags: ["comfy", "healthy", "light"],
     image: "/images/baba-ghanoush.jpg",
+    imageKey: "baba-ghanoush",
   },
   {
     id: 14,
@@ -112,6 +125,7 @@ export const foods: Food[] = [
     category: "main",
     tags: ["comfy", "3arabe", "beshabe3"],
     image: "/images/moussaka.jpg",
+    imageKey: "moussaka",
   },
   {
     id: 15,
@@ -120,6 +134,7 @@ export const foods: Food[] = [
     category: "main",
     tags: ["comfy", "3arabe", "beshabe3"],
     image: "/images/fattet-hummus.jpg",
+    imageKey: "fattet-hummus",
   },
   {
     id: 16,
@@ -128,6 +143,7 @@ export const foods: Food[] = [
     category: "snack",
     tags: ["trendy", "sare3", "light"],
     image: "/images/sfiha.jpg",
+    imageKey: "sfiha",
   },
   {
     id: 17,
@@ -136,6 +152,7 @@ export const foods: Food[] = [
     category: "snack",
     tags: ["sare3", "light", "trendy"],
     image: "/images/sambousek.jpg",
+    imageKey: "sambousek",
   },
   {
     id: 18,
@@ -144,6 +161,7 @@ export const foods: Food[] = [
     category: "dessert",
     tags: ["sweet", "trendy", "3arabe"],
     image: "/images/knefeh.jpg",
+    imageKey: "knefeh",
   },
   {
     id: 19,
@@ -152,6 +170,7 @@ export const foods: Food[] = [
     category: "dessert",
     tags: ["sweet", "3arabe", "light"],
     image: "/images/baklava.jpg",
+    imageKey: "baklava",
   },
   {
     id: 20,
@@ -160,6 +179,7 @@ export const foods: Food[] = [
     category: "dessert",
     tags: ["sweet", "3arabe", "light"],
     image: "/images/maamoul.jpg",
+    imageKey: "maamoul",
   },
   {
     id: 21,
@@ -168,6 +188,7 @@ export const foods: Food[] = [
     category: "dessert",
     tags: ["sweet", "3arabe", "trendy"],
     image: "/images/atayef.jpg",
+    imageKey: "atayef",
   },
   {
     id: 22,
@@ -176,6 +197,8 @@ export const foods: Food[] = [
     category: "main",
     tags: ["comfy", "3arabe", "desem"],
     image: "/images/mloukhieh.jpg",
+    imageKey: "mloukhieh",
+    attributes: { timeOfDay: ["8ada"], dietType: ["chicken", "meat"], source: ["homecooking"] }
   },
   {
     id: 23,
@@ -184,5 +207,287 @@ export const foods: Food[] = [
     category: "main",
     tags: ["comfy", "3arabe", "beshabe3"],
     image: "/images/fasoulia.jpg",
+    imageKey: "fasoulia",
+    attributes: { timeOfDay: ["8ada"], dietType: ["meat"], source: ["homecooking"] }
   },
+  {
+    id: 24,
+    name3ar: "Moghrabieh",
+    nameAr: "مغربية",
+    category: "main",
+    tags: ["comfy", "3arabe", "desem"],
+    image: "/images/moghrabieh.jpg",
+    imageKey: "moghrabieh",
+    attributes: { timeOfDay: ["8ada"], dietType: ["chicken"], source: ["homecooking"] }
+  },
+  {
+    id: 25,
+    name3ar: "Shish Barak",
+    nameAr: "شيش برك",
+    category: "main",
+    tags: ["comfy", "3arabe", "desem"],
+    image: "/images/shish-barak.jpg",
+    imageKey: "shish-barak",
+    attributes: { timeOfDay: ["8ada"], dietType: ["meat"], source: ["homecooking"] }
+  },
+  {
+    id: 26,
+    name3ar: "Riz b Djeij",
+    nameAr: "رز بدجاج",
+    category: "main",
+    tags: ["comfy", "3arabe", "healthy"],
+    image: "/images/riz-djeij.jpg",
+    imageKey: "riz-djeij",
+    attributes: { timeOfDay: ["8ada"], dietType: ["chicken"], source: ["homecooking"] }
+  },
+  {
+    id: 27,
+    name3ar: "Kousa Mahshi",
+    nameAr: "كوسا محشي",
+    category: "main",
+    tags: ["comfy", "3arabe", "beshabe3"],
+    image: "/images/kousa-mahshi.jpg",
+    imageKey: "kousa-mahshi",
+    attributes: { timeOfDay: ["8ada"], dietType: ["meat"], source: ["homecooking"] }
+  },
+  {
+    id: 28,
+    name3ar: "Sheikh el Mahshi",
+    nameAr: "شيخ المحشي",
+    category: "main",
+    tags: ["comfy", "3arabe", "desem"],
+    image: "/images/sheikh-mahshi.jpg",
+    imageKey: "sheikh-mahshi",
+    attributes: { timeOfDay: ["8ada"], dietType: ["meat"], source: ["homecooking"] }
+  },
+  {
+    id: 29,
+    name3ar: "Labneh",
+    nameAr: "لبنة",
+    category: "breakfast",
+    tags: ["healthy", "light", "fresh"],
+    image: "/images/labneh.jpg",
+    imageKey: "labneh",
+    attributes: { timeOfDay: ["tarwee2a", "3asha"], dietType: ["vegan"], source: ["homecooking"] }
+  },
+  {
+    id: 30,
+    name3ar: "Zaatar & Olives",
+    nameAr: "زعتر وزيتون",
+    category: "breakfast",
+    tags: ["healthy", "light", "3arabe"],
+    image: "/images/zaatar.jpg",
+    imageKey: "zaatar",
+    attributes: { timeOfDay: ["tarwee2a", "3asha"], dietType: ["vegan"], source: ["homecooking"] }
+  },
+  {
+    id: 31,
+    name3ar: "Grilled Halloumi",
+    nameAr: "حلوم مشوي",
+    category: "breakfast",
+    tags: ["healthy", "light", "fresh"],
+    image: "/images/halloumi.jpg",
+    imageKey: "halloumi",
+    attributes: { timeOfDay: ["tarwee2a", "3asha"], dietType: ["vegan"], source: ["homecooking"] }
+  },
+  {
+    id: 32,
+    name3ar: "Eggs & Awarma",
+    nameAr: "بيض وقاورما",
+    category: "breakfast",
+    tags: ["desem", "beshabe3", "3arabe"],
+    image: "/images/eggs-awarma.jpg",
+    imageKey: "eggs-awarma",
+    attributes: { timeOfDay: ["tarwee2a"], dietType: ["meat"], source: ["homecooking"] }
+  },
+  {
+    id: 33,
+    name3ar: "Caesar Salad",
+    nameAr: "سلطة سيزر",
+    category: "main",
+    tags: ["healthy", "light", "trendy"],
+    image: "/images/caesar-salad.jpg",
+    imageKey: "caesar-salad",
+    attributes: { timeOfDay: ["8ada", "3asha"], dietType: ["chicken"], source: ["delivery"] }
+  },
+  {
+    id: 34,
+    name3ar: "Sushi Combo",
+    nameAr: "سوشي",
+    category: "main",
+    tags: ["trendy", "light", "fresh"],
+    image: "/images/sushi.jpg",
+    imageKey: "sushi",
+    attributes: { timeOfDay: ["8ada", "3asha"], dietType: ["fish"], source: ["delivery"] }
+  },
+  {
+    id: 35,
+    name3ar: "Beef Burger",
+    nameAr: "برجر لحم",
+    category: "main",
+    tags: ["sare3", "beshabe3", "desem"],
+    image: "/images/beef-burger.jpg",
+    imageKey: "beef-burger",
+    attributes: { timeOfDay: ["8ada", "3asha"], dietType: ["meat"], source: ["delivery"] }
+  },
+  {
+    id: 36,
+    name3ar: "Margherita Pizza",
+    nameAr: "بيتزا مارغريتا",
+    category: "main",
+    tags: ["sare3", "beshabe3", "trendy"],
+    image: "/images/pizza.jpg",
+    imageKey: "pizza",
+    attributes: { timeOfDay: ["8ada", "3asha"], dietType: ["vegan"], source: ["delivery"] }
+  },
+  {
+    id: 37,
+    name3ar: "Steak et Frites",
+    nameAr: "ستيك وبطاطا",
+    category: "main",
+    tags: ["desem", "beshabe3", "trendy"],
+    image: "/images/steak-frites.jpg",
+    imageKey: "steak-frites",
+    attributes: { timeOfDay: ["8ada", "3asha"], dietType: ["meat"], source: ["delivery"] }
+  },
+  {
+    id: 38,
+    name3ar: "Chicken Tawouk",
+    nameAr: "طاووق",
+    category: "main",
+    tags: ["sare3", "beshabe3", "3arabe"],
+    image: "/images/tawouk.jpg",
+    imageKey: "tawouk",
+    attributes: { timeOfDay: ["8ada", "3asha"], dietType: ["chicken"], source: ["delivery", "homecooking"] }
+  },
+  {
+    id: 39,
+    name3ar: "Fish & Chips",
+    nameAr: "سمك وبطاطا",
+    category: "main",
+    tags: ["beshabe3", "desem", "trendy"],
+    image: "/images/fish-chips.jpg",
+    imageKey: "fish-chips",
+    attributes: { timeOfDay: ["8ada", "3asha"], dietType: ["fish"], source: ["delivery"] }
+  },
+  {
+    id: 40,
+    name3ar: "Pesto Pasta",
+    nameAr: "باستا بيستو",
+    category: "main",
+    tags: ["healthy", "light", "trendy"],
+    image: "/images/pesto-pasta.jpg",
+    imageKey: "pesto-pasta",
+    attributes: { timeOfDay: ["8ada", "3asha"], dietType: ["vegan"], source: ["homecooking", "delivery"] }
+  },
+  {
+    id: 41,
+    name3ar: "Lentil Soup",
+    nameAr: "شوربة عدس",
+    category: "main",
+    tags: ["healthy", "light", "comfy"],
+    image: "/images/lentil-soup.jpg",
+    imageKey: "lentil-soup",
+    attributes: { timeOfDay: ["8ada", "3asha"], dietType: ["vegan"], source: ["homecooking"] }
+  },
+  {
+    id: 42,
+    name3ar: "Fruit Salad",
+    nameAr: "سلطة فواكه",
+    category: "dessert",
+    tags: ["sweet", "fresh", "light"],
+    image: "/images/fruit-salad.jpg",
+    imageKey: "fruit-salad",
+    attributes: { timeOfDay: ["3asha"], dietType: ["vegan"], source: ["homecooking"] }
+  },
+  {
+    id: 43,
+    name3ar: "Rice Pudding (Riz bi Haleeb)",
+    nameAr: "رز بحليب",
+    category: "dessert",
+    tags: ["sweet", "comfy", "3arabe"],
+    image: "/images/riz-haleeb.jpg",
+    imageKey: "riz-haleeb",
+    attributes: { timeOfDay: ["3asha"], dietType: ["vegan"], source: ["homecooking"] }
+  },
+  {
+    id: 44,
+    name3ar: "Sfouf",
+    nameAr: "صفوف",
+    category: "dessert",
+    tags: ["sweet", "3arabe", "light"],
+    image: "/images/sfouf.jpg",
+    imageKey: "sfouf",
+    attributes: { timeOfDay: ["3asha"], dietType: ["vegan"], source: ["homecooking"] }
+  },
+  {
+    id: 45,
+    name3ar: "Nammoura",
+    nameAr: "نمورة",
+    category: "dessert",
+    tags: ["sweet", "3arabe", "desem"],
+    image: "/images/nammoura.jpg",
+    imageKey: "nammoura",
+    attributes: { timeOfDay: ["3asha"], dietType: ["vegan"], source: ["homecooking"] }
+  },
+  {
+    id: 46,
+    name3ar: "Kunafa Rolls",
+    nameAr: "كنافة",
+    category: "dessert",
+    tags: ["sweet", "trendy", "desem"],
+    image: "/images/kunafa.jpg",
+    imageKey: "kunafa",
+    attributes: { timeOfDay: ["3asha"], dietType: ["vegan"], source: ["delivery"] }
+  },
+  {
+    id: 47,
+    name3ar: "Grilled Salmon",
+    nameAr: "سلمون مشوي",
+    category: "main",
+    tags: ["healthy", "light", "fresh"],
+    image: "/images/salmon.jpg",
+    imageKey: "salmon",
+    attributes: { timeOfDay: ["8ada", "3asha"], dietType: ["fish"], source: ["delivery", "homecooking"] }
+  },
+  {
+    id: 48,
+    name3ar: "Fattet Batenjan",
+    nameAr: "فتة باذنجان",
+    category: "main",
+    tags: ["comfy", "3arabe", "desem"],
+    image: "/images/fattet-batenjan.jpg",
+    imageKey: "fattet-batenjan",
+    attributes: { timeOfDay: ["8ada"], dietType: ["meat"], source: ["homecooking"] }
+  },
+  {
+    id: 49,
+    name3ar: "Malfouf",
+    nameAr: "ملفوف",
+    category: "main",
+    tags: ["comfy", "3arabe", "beshabe3"],
+    image: "/images/malfouf.jpg",
+    imageKey: "malfouf",
+    attributes: { timeOfDay: ["8ada"], dietType: ["meat"], source: ["homecooking"] }
+  },
+  {
+    id: 50,
+    name3ar: "Shawarma Platter",
+    nameAr: "جاط شاورما",
+    category: "main",
+    tags: ["beshabe3", "desem", "3arabe"],
+    image: "/images/shawarma-platter.jpg",
+    imageKey: "shawarma-platter",
+    attributes: { timeOfDay: ["8ada", "3asha"], dietType: ["chicken", "meat"], source: ["delivery"] }
+  },
+  {
+    id: 51,
+    name3ar: "Baklawa Selection",
+    nameAr: "تشكيلة بقلاوة",
+    category: "dessert",
+    tags: ["sweet", "3arabe", "light"],
+    image: "/images/baklawa.jpg",
+    imageKey: "baklawa",
+    attributes: { timeOfDay: ["3asha"], dietType: ["vegan"], source: ["delivery"] }
+  }
 ];

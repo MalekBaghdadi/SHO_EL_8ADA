@@ -24,6 +24,9 @@ export interface SelectionParams {
   } | null;
   lastFoodId?: number;
   excludedFoodIds?: number[];
+  excludedTags?: string[];
+  favorites?: number[];
+  history?: number[];
   sessionBias?: SessionBias;
   decisionTightness?: number;
 }
@@ -40,6 +43,7 @@ export interface SelectionResult {
     decisionTightness: number;
     effectiveBiasMultiplier: number;
     effectivePenaltyMultiplier: number;
+    specificReason?: string;
   };
 }
 
@@ -56,6 +60,9 @@ export function selectFood({
   aiIntent,
   lastFoodId,
   excludedFoodIds,
+  excludedTags,
+  favorites,
+  history,
   sessionBias,
   decisionTightness: rawTightness,
 }: SelectionParams): SelectionResult {
@@ -83,6 +90,13 @@ export function selectFood({
     if (selectedTags.length > 0) {
       candidateFoods = candidateFoods.filter((food) =>
         selectedTags.some((tag) => food.tags.includes(tag))
+      );
+    }
+
+    // Apply explicit tag exclusions (HARD FILTER)
+    if (excludedTags && excludedTags.length > 0) {
+      candidateFoods = candidateFoods.filter((food) =>
+        !excludedTags.some((tag) => food.tags.includes(tag))
       );
     }
 
@@ -136,6 +150,7 @@ export function selectFood({
   // In SURPRISE mode, ignore bias entirely
   let selectedFood: Food | null = null;
   let appliedBias = 0;
+  let resultReason = "";
 
   if (candidateFoods.length > 0) {
     if (mode === "SURPRISE" || !sessionBias) {
@@ -146,6 +161,7 @@ export function selectFood({
       // Weighted selection based on session bias
       const scores = candidateFoods.map((food) => {
         let score = 100; // Base score
+        let reason = "";
 
         // Apply attribute bias
         if (food.attributes) {
@@ -165,7 +181,23 @@ export function selectFood({
           score += bias * biasMultiplier;
         }
 
-        return { food, score: Math.max(score, 1) }; // Minimum score of 1
+        // Apply Long-Term Personalization
+        if (favorites?.includes(food.id)) {
+          score += 15; // Favorites get a static boost
+          reason = "Favorite Boost";
+        }
+
+        if (history && history.length > 0) {
+          // Cooldown logic: last 5 history items get a penalty
+          const recencyIndex = history.slice(0, 5).indexOf(food.id);
+          if (recencyIndex !== -1) {
+            // Penalty decreases with age: 0th = -20, 4th = -4
+            score -= (20 - (recencyIndex * 4));
+            reason = "History Cooldown";
+          }
+        }
+
+        return { food, score: Math.max(score, 1), reason }; // Minimum score of 1
       });
 
       // Calculate total applied bias for debug
@@ -176,10 +208,12 @@ export function selectFood({
       const totalScore = scores.reduce((sum, s) => sum + s.score, 0);
       let random = Math.random() * totalScore;
 
-      for (const { food, score } of scores) {
+      for (const { food, score, reason } of scores) {
         random -= score;
         if (random <= 0) {
           selectedFood = food;
+          appliedBias = score - 100;
+          resultReason = reason;
           break;
         }
       }
@@ -203,6 +237,7 @@ export function selectFood({
       decisionTightness: tightness,
       effectiveBiasMultiplier: biasMultiplier,
       effectivePenaltyMultiplier: penaltyMultiplier,
+      specificReason: mode === "SURPRISE" ? "Random Surprise" : resultReason || "Natural Probability",
     },
   };
 }

@@ -1,0 +1,23 @@
+  ▲ Next.js 14.2.5
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+
+./app/page.tsx
+141:6  Warning: React Hook useEffect has a missing dependency: 'updateFoodSelection'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+Failed to compile.
+
+./lib/testAntiRepeat.ts:6:28
+Type error: Type '"Fast Food"' is not assignable to type 'FoodCategory'.
+
+[0m [90m 4 |[39m [90m// Mock Data[39m[0m
+[0m [90m 5 |[39m [36mconst[39m mockFoods[33m:[39m [33mFood[39m[] [33m=[39m [[0m
+[0m[31m[1m>[22m[39m[90m 6 |[39m   { id[33m:[39m [35m1[39m[33m,[39m name[33m:[39m [32m"Burger"[39m[33m,[39m category[33m:[39m [32m"Fast Food"[39m[33m,[39m tags[33m:[39m [[32m"meat"[39m[33m,[39m [32m"heavy"[39m][33m,[39m attributes[33m:[39m {} }[33m,[39m[0m
+[0m [90m   |[39m                            [31m[1m^[22m[39m[0m
+[0m [90m 7 |[39m   { id[33m:[39m [35m2[39m[33m,[39m name[33m:[39m [32m"Salad"[39m[33m,[39m category[33m:[39m [32m"Healthy"[39m[33m,[39m tags[33m:[39m [[32m"vegan"[39m[33m,[39m [32m"light"[39m][33m,[39m attributes[33m:[39m {} }[33m,[39m[0m
+[0m [90m 8 |[39m   { id[33m:[39m [35m3[39m[33m,[39m name[33m:[39m [32m"Pizza"[39m[33m,[39m category[33m:[39m [32m"Fast Food"[39m[33m,[39m tags[33m:[39m [[32m"vegetarian"[39m[33m,[39m [32m"heavy"[39m][33m,[39m attributes[33m:[39m {} }[33m,[39m[0m
+[0m [90m 9 |[39m ][33m;[39m[0m
