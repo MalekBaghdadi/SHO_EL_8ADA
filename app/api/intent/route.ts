@@ -2,24 +2,23 @@ import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { localIntent } from "@/lib/localIntent";
 
-console.log("GEMINI ENABLED:", !!process.env.GEMINI_API_KEY);
 
 // Available tags from the food system
 const AVAILABLE_TAGS = [
-  "comfy",     // comfort, relaxing
-  "healthy",   // healthy, diet
+  "comfort",   // comfort food, relaxing, cozy
+  "healthy",   // healthy, diet, nutritious
   "light",     // light, easy on stomach
-  "beshabe3",  // filling, hearty
-  "sare3",     // quick, fast
-  "trendy",    // popular, famous
-  "te2lidi",   // traditional, authentic
-  "desem",     // heavy, rich
-  "fresh",     // fresh, new
-  "sweet",     // sweet, dessert
+  "heavy",     // heavy, rich, filling, large portions
+  "quick",     // quick, fast, on-the-go
+  "trendy",    // popular, famous, modern
+  "traditional",// traditional, authentic, classic
+  "sweet",     // sweet, dessert, sugary
+  "spicy",     // spicy, hot, heat
+  "fresh",     // fresh, crisp, refreshing
 ];
 
-// Available food categories for exclusions
-const AVAILABLE_CATEGORIES = ["breakfast", "main", "snack", "dessert"];
+// Available time-based exclusions
+const AVAILABLE_EXCLUSIONS = ["tarwee2a", "8ada", "3asha"];
 
 export async function POST(request: NextRequest) {
   const startTime = Date.now();
@@ -60,29 +59,28 @@ export async function POST(request: NextRequest) {
 
         // Try multiple model names as fallback
         const modelNames = [
-          "gemini-2.5-flash",
-          "gemini-1.5-flash-latest",
           "gemini-1.5-flash",
-          "gemini-pro",
+          "gemini-2.0-flash",
+          "gemini-1.5-flash-latest",
           "gemini-1.5-pro",
         ];
 
         const prompt = `You are a food intent parser for a Lebanese food suggestion app. Extract tags from user input.
 
 AVAILABLE TAGS (use ONLY these exact string values):
-- "comfy" = comfort food, relaxing, cozy
+- "comfort" = comfort food, relaxing, cozy
 - "healthy" = healthy, diet, light eating  
 - "light" = light, not heavy, easy on stomach
-- "beshabe3" = filling, satisfying, hearty
-- "sare3" = quick, fast, on-the-go
-- "trendy" = popular, famous, well-known
-- "te2lidi" = traditional, classic, authentic
-- "desem" = heavy, rich, filling
-- "fresh" = fresh, new, crisp
+- "heavy" = heavy, rich, filling, large portions
+- "quick" = quick, fast, on-the-go
+- "trendy" = popular, modern, famous
+- "traditional" = traditional, classic, authentic
 - "sweet" = sweet, dessert, sugary
+- "spicy" = spicy, hot, heat
+- "fresh" = fresh, crisp, refreshing
 
-CATEGORIES FOR EXCLUSIONS:
-- "breakfast", "main", "snack", "dessert"
+EXCLUSIONS (by timeOfDay):
+- "tarwee2a", "8ada", "3asha"
 
 INPUT: "${text}"
 
@@ -101,9 +99,9 @@ JSON response:`;
           try {
             const model = genAI.getGenerativeModel({ model: modelName });
 
-            // Add timeout to prevent hanging (5 seconds)
+            // Add timeout to prevent hanging (10 seconds)
             const timeoutPromise = new Promise<never>((_, reject) =>
-              setTimeout(() => reject(new Error("Gemini API timeout")), 5000)
+              setTimeout(() => reject(new Error("Gemini API timeout")), 10000)
             );
 
             const result = await Promise.race([
@@ -115,7 +113,7 @@ JSON response:`;
             modelWorked = true;
             break; // Success, exit loop
           } catch (modelError: any) {
-            if (modelError?.status === 404) {
+            if (modelError?.status === 404 || modelError?.status === 429) {
               continue;
             } else {
               throw modelError;
@@ -135,7 +133,7 @@ JSON response:`;
               : [];
 
             aiExclude = Array.isArray(intent.exclude)
-              ? intent.exclude.filter((cat: string) => AVAILABLE_CATEGORIES.includes(cat))
+              ? intent.exclude.filter((cat: string) => AVAILABLE_EXCLUSIONS.includes(cat))
               : [];
           } catch (parseError) {
             console.error("Failed to parse AI response:", parseError);
@@ -147,15 +145,6 @@ JSON response:`;
       const errorMsg = error?.message || String(error);
       const errorStatus = error?.status;
 
-      if (errorStatus === 429) {
-        console.error("AI API rate limit (429) - using local tags:", errorMsg);
-      } else if (errorStatus === 404) {
-        console.error("AI API model not found (404) - using local tags:", errorMsg);
-      } else if (errorMsg.includes("timeout")) {
-        console.error("AI API timeout - using local tags");
-      } else {
-        console.error("AI API error (swallowed):", errorMsg, "Status:", errorStatus);
-      }
     }
 
     // 3. Merge results: union of localTags and aiTags
@@ -185,21 +174,18 @@ JSON response:`;
       },
     });
   } catch (error) {
-    // Last resort fallback
-    console.error("Unexpected error in intent API:", error);
-    const fallbackTags = text ? localIntent(text) : [];
+    const localTags = text ? localIntent(text) : [];
+    const finalTags = localTags.filter((tag: string) => AVAILABLE_TAGS.includes(tag));
     const latencyMs = Date.now() - startTime;
-    const tags = fallbackTags.filter((tag: string) => AVAILABLE_TAGS.includes(tag));
-    const source: "local" | "gemini" | "both" | "none" = tags.length > 0 ? "local" : "none";
     return NextResponse.json({
-      tags,
+      tags: finalTags,
       exclude: [],
       meta: {
         input: text,
-        localTags: text ? localIntent(text) : [],
+        localTags,
         aiTags: [],
-        finalTags: tags,
-        source,
+        finalTags,
+        source: finalTags.length > 0 ? "local" : "none",
         latencyMs,
       },
     });

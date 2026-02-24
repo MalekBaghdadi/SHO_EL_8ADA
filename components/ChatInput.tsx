@@ -21,8 +21,8 @@ export default function ChatInput({ onIntentResolved, onFullIntent }: ChatInputP
     if (!input.trim() || isLoading) return;
 
     const text = input.trim();
-    setInput("");
     setIsLoading(true);
+    setInput("");
 
     try {
       const response = await fetch("/api/intent", {

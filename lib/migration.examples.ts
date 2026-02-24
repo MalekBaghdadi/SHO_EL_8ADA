@@ -24,9 +24,9 @@ const hummus: Food = {
   id: 1,
   name3ar: '7mous',
   nameAr: 'حمص',
-  category: 'breakfast',
+  mealType: 'appetizer',
   tags: ['comfy', 'healthy', 'light'],
-  image: '/images/hummus.jpg',
+  imageUrl: 'https://images.unsplash.com/photo-1637949385162-e416fb15b2ce?auto=format&fit=crop&q=80&w=800',
   // No attributes field yet
 };
 
@@ -49,25 +49,25 @@ const existingFoods: Food[] = [
     id: 1,
     name3ar: '7mous',
     nameAr: 'حمص',
-    category: 'breakfast',
+    mealType: 'appetizer',
     tags: ['comfy', 'healthy', 'light'],
-    image: '/images/hummus.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=800',
   },
   {
     id: 7,
     name3ar: 'Shawarma',
     nameAr: 'شاورما',
-    category: 'main',
+    mealType: 'main',
     tags: ['trendy', 'sare3', 'beshabe3'],
-    image: '/images/shawarma.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1662116765994-1e4200c43589?auto=format&fit=crop&q=80&w=800',
   },
   {
     id: 18,
     name3ar: 'Knefeh',
     nameAr: 'كنافة',
-    category: 'dessert',
+    mealType: 'dessert',
     tags: ['sweet', 'trendy', 'te2lidi'],
-    image: '/images/knefeh.jpg',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/1/10/Kunafa-Kanafeh.jpg',
   },
 ];
 
@@ -136,7 +136,7 @@ function migrateByCategory(
 ): void {
   console.log(`\n=== Migrating ${category} items ===`);
 
-  const categoryFoods = foods.filter(f => f.category === category);
+  const categoryFoods = foods.filter(f => f.mealType === category);
   const result = bulkAddAttributes(
     categoryFoods,
     attributeMap,

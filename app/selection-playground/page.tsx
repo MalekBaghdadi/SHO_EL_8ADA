@@ -16,9 +16,9 @@ const MOCK_FOODS: Food[] = [
     id: 1,
     name3ar: "7mous",
     nameAr: "حمص",
-    category: "breakfast",
-    tags: ["comfy", "healthy", "light"],
-    image: "/images/hummus.jpg",
+    mealType: "appetizer",
+    tags: ["healthy", "light", "comfort"],
+    imageUrl: "https://images.unsplash.com/photo-1637949385162-e416fb15b2ce?auto=format&fit=crop&q=80&w=800",
     attributes: {
       timeOfDay: ["tarwee2a", "8ada"],
       dietType: ["vegan"],
@@ -29,9 +29,9 @@ const MOCK_FOODS: Food[] = [
     id: 2,
     name3ar: "Shawarma Chicken",
     nameAr: "شاورما دجاج",
-    category: "main",
-    tags: ["trendy", "sare3", "beshabe3"],
-    image: "/images/shawarma.jpg",
+    mealType: "main",
+    tags: ["quick", "trendy", "heavy"],
+    imageUrl: "https://images.unsplash.com/photo-1662116765994-1e4200c43589?auto=format&fit=crop&q=80&w=800",
     attributes: {
       timeOfDay: ["8ada", "3asha"],
       dietType: ["chicken"],
@@ -42,9 +42,9 @@ const MOCK_FOODS: Food[] = [
     id: 3,
     name3ar: "Shawarma Meat",
     nameAr: "شاورما لحمة",
-    category: "main",
-    tags: ["trendy", "sare3", "beshabe3"],
-    image: "/images/shawarma.jpg",
+    mealType: "main",
+    tags: ["quick", "trendy", "heavy"],
+    imageUrl: "https://images.unsplash.com/photo-1529006557870-1748259bd77e?q=80&w=2000&auto=format&fit=crop",
     attributes: {
       timeOfDay: ["8ada", "3asha"],
       dietType: ["meat"],
@@ -55,9 +55,9 @@ const MOCK_FOODS: Food[] = [
     id: 4,
     name3ar: "Fattoush",
     nameAr: "فتوش",
-    category: "main",
+    mealType: "appetizer",
     tags: ["fresh", "healthy", "light"],
-    image: "/images/fattoush.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&q=80&w=800",
     attributes: {
       timeOfDay: ["8ada"],
       dietType: ["vegan"],
@@ -68,9 +68,9 @@ const MOCK_FOODS: Food[] = [
     id: 5,
     name3ar: "Knefeh",
     nameAr: "كنافة",
-    category: "dessert",
-    tags: ["sweet", "trendy", "te2lidi"],
-    image: "/images/knefeh.jpg",
+    mealType: "dessert",
+    tags: ["sweet", "trendy", "traditional"],
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/10/Kunafa-Kanafeh.jpg",
     attributes: {
       timeOfDay: ["tarwee2a", "3asha"], // Breakfast or dinner/dessert
       dietType: ["vegan"], // Usually vegan-friendly base, cheese is dairy but not meat
@@ -81,9 +81,9 @@ const MOCK_FOODS: Food[] = [
     id: 6,
     name3ar: "Mjaddara",
     nameAr: "مجدرة",
-    category: "main",
-    tags: ["comfy", "te2lidi", "beshabe3"],
-    image: "/images/mujaddara.jpg",
+    mealType: "main",
+    tags: ["heavy", "comfort", "traditional"],
+    imageUrl: "https://images.unsplash.com/photo-153806655523d-718915520970?auto=format&fit=crop&q=80&w=800",
     attributes: {
       // Missing timeOfDay - should be neutral
       dietType: ["vegan"],
@@ -94,9 +94,9 @@ const MOCK_FOODS: Food[] = [
     id: 7,
     name3ar: "Sayadieh",
     nameAr: "صيادية",
-    category: "main",
-    tags: ["te2lidi", "healthy", "desem"],
-    image: "/images/sayadieh.jpg",
+    mealType: "main",
+    tags: ["healthy", "heavy", "traditional"],
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/86/Fish_Sayadieh.jpg",
     attributes: {
       timeOfDay: ["8ada"],
       dietType: ["fish"],
@@ -107,9 +107,9 @@ const MOCK_FOODS: Food[] = [
     id: 8,
     name3ar: "Man2oushe Zaatar",
     nameAr: "منقوشة زعتر",
-    category: "breakfast",
-    tags: ["sare3", "trendy", "comfy"],
-    image: "/images/manoushe.jpg",
+    mealType: "appetizer",
+    tags: ["quick", "trendy", "comfort"],
+    imageUrl: "https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?auto=format&fit=crop&q=80&w=800",
     attributes: {
       timeOfDay: ["tarwee2a"],
       dietType: ["vegan"],
@@ -120,9 +120,9 @@ const MOCK_FOODS: Food[] = [
     id: 9,
     name3ar: "Man2oushe Jebneh",
     nameAr: "منقوشة جبنة",
-    category: "breakfast",
-    tags: ["sare3", "trendy", "comfy"],
-    image: "/images/manoushe.jpg",
+    mealType: "appetizer",
+    tags: ["quick", "trendy", "comfort"],
+    imageUrl: "https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?auto=format&fit=crop&q=80&w=800",
     attributes: {
       timeOfDay: ["tarwee2a", "3asha"],
       dietType: ["vegan"], // Technically vegetarian, but we use vegan for non-meat
@@ -133,18 +133,18 @@ const MOCK_FOODS: Food[] = [
     id: 10,
     name3ar: "Mystery Item",
     nameAr: "؟؟؟",
-    category: "snack",
+    mealType: "main",
     tags: [],
-    image: "/images/placeholder.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800",
     // No attributes at all
   },
   {
     id: 11,
     name3ar: "Mixed Grill",
     nameAr: "مشاوي",
-    category: "main",
-    tags: ["te2lidi", "desem", "mashhour"],
-    image: "/images/grill.jpg",
+    mealType: "main",
+    tags: ["heavy", "trendy", "traditional"],
+    imageUrl: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&q=80&w=800",
     attributes: {
       timeOfDay: ["8ada", "3asha"],
       dietType: ["meat", "chicken"], // Mixed!
@@ -155,9 +155,9 @@ const MOCK_FOODS: Food[] = [
     id: 12,
     name3ar: "Falafel",
     nameAr: "فلافل",
-    category: "main",
-    tags: ["trendy", "sare3", "beshabe3"],
-    image: "/images/falafel.jpg",
+    mealType: "main",
+    tags: ["quick", "trendy", "heavy"],
+    imageUrl: "https://images.unsplash.com/photo-1593001872095-7d5b3868fb1d?auto=format&fit=crop&q=80&w=800",
     attributes: {
       timeOfDay: ["8ada", "3asha"],
       dietType: ["vegan"],
@@ -335,7 +335,6 @@ export default function SelectionPlayground() {
                     <h3 className="text-xl font-bold text-white">
                       {item.food.name3ar}
                     </h3>
-                    <p className="text-gray-400 text-sm">{item.food.category}</p>
                   </div>
                   <div className="text-right">
                     <span className="text-2xl font-bold text-brand-green">

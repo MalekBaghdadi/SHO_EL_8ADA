@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "validate:images": "node scripts/validate-images.mjs",
-    "build": "npm run validate:images && next build"
+    "lint": "next lint"
   },
   "dependencies": {
     "@google/genai": "^1.37.0",

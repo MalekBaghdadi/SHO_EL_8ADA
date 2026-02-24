@@ -2,7 +2,6 @@
 
 import { Food } from "@/types/food";
 import { foods } from "@/data/foods";
-import { resolveFoodImage } from "@/lib/imageResolver";
 import Image from "next/image";
 
 interface FoodHistoryProps {
@@ -41,7 +40,7 @@ export default function FoodHistory({ history, onSelect, favorites, onToggleFavo
                         >
                             <div className="relative aspect-square rounded-lg overflow-hidden bg-gray-800 mb-2 border border-gray-700 group-hover:border-brand-green transition-all">
                                 <Image
-                                    src={resolveFoodImage(food)}
+                                    src={food.imageUrl}
                                     alt={food.name3ar}
                                     fill
                                     className="object-cover group-hover:scale-110 transition-transform duration-300"

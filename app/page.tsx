@@ -16,24 +16,20 @@ import ChatInput from "@/components/ChatInput";
 import FoodCardSkeleton from "@/components/FoodCardSkeleton";
 import FoodHistory from "@/components/FoodHistory";
 import { usePersistence } from "@/lib/hooks/usePersistence";
-import { foods as allFoods } from "@/data/foods";
 import DecisionExplanation from "@/components/DecisionExplanation";
 
-// Canonical tag list - single source of truth for UI
+// Canonical tag list - single source of truth for UI (Mood tags only)
 const TAGS = [
-  "comfy",
+  "comfort",
   "healthy",
   "light",
-  "beshabe3",
-  "sare3",
+  "heavy",
+  "quick",
   "trendy",
-  "desem",
-  "3arabe",
-  "desem",
-  "7elo",
-  "tarwee2a",
-  "8ada",
-  "3asha"
+  "traditional",
+  "sweet",
+  "spicy",
+  "fresh"
 ];
 
 interface Intent {
@@ -78,6 +74,10 @@ export default function Home() {
       label: 'When',
       tags: ['tarwee2a', '8ada', '3asha']
     },
+    mealType: {
+      label: 'Meal Type',
+      tags: ['appetizer', 'main', 'dessert']
+    },
     protein: {
       label: 'Protein',
       tags: ['chicken', 'meat', 'fish', 'vegan']
@@ -118,10 +118,6 @@ export default function Home() {
       setIsTransitioning(false);
     }, 400);
 
-    // Debug logging for analytics/validation
-    if (process.env.NODE_ENV === 'development') {
-      console.log("Selection Debug:", result.debug);
-    }
   }, [includedTags, excludedTags, aiIntent, excludedFoodIds, sessionBias, decisionTightness, favorites, history]);
 
   // Update selection when filters change
@@ -206,12 +202,10 @@ export default function Home() {
         </p>
         <ChatInput
           onIntentResolved={(aiTags) => {
-            console.log("AI tags:", aiTags);
             // Only include AI tags that aren't currently explicitly excluded
             const normalized = TAGS.filter(tag =>
               aiTags.includes(tag) && !excludedTags.includes(tag)
             );
-            console.log("Normalized tags:", normalized);
             setIncludedTags(normalized);
           }}
           onFullIntent={(intent) => setAiIntent(intent)}
@@ -358,6 +352,32 @@ export default function Home() {
           </>
         ) : null}
 
+        <div className="flex flex-col items-center gap-4 mt-8">
+          <button
+            onClick={handleNextFood}
+            className="bg-brand-green hover:bg-brand-green/90 text-white font-semibold py-3 px-8 rounded-lg text-lg transition-colors shadow-md"
+          >
+            Sounds Good
+          </button>
+
+          <button
+            onClick={handleRejectFood}
+            className="text-gray-400 hover:text-red-500 text-sm transition-colors"
+          >
+            Skip
+          </button>
+
+          <button
+            onClick={() => {
+              setIncludedTags([]);
+              setExcludedTags([]);
+            }}
+            className="text-white/60 hover:text-white text-sm transition-colors mt-2"
+          >
+            Reset tags
+          </button>
+        </div>
+
         <FoodHistory
           history={history}
           favorites={favorites}
@@ -371,31 +391,6 @@ export default function Home() {
             }
           }}
         />
-        <div className="flex flex-col items-center gap-4 mt-8">
-          <button
-            onClick={handleNextFood}
-            className="bg-brand-green hover:bg-brand-green/90 text-white font-semibold py-3 px-8 rounded-lg text-lg transition-colors shadow-md"
-          >
-            3a2bel tani
-          </button>
-
-          <button
-            onClick={handleRejectFood}
-            className="text-gray-400 hover:text-white text-sm transition-colors"
-          >
-            مش هيدا
-          </button>
-
-          <button
-            onClick={() => {
-              setIncludedTags([]);
-              setExcludedTags([]);
-            }}
-            className="text-white/60 hover:text-white text-sm transition-colors mt-2"
-          >
-            Reset tags
-          </button>
-        </div>
       </div>
     </main>
   );

@@ -3,9 +3,9 @@ import { Food } from '@/types/food';
 
 // Mock Data
 const mockFoods: Food[] = [
-  { id: 1, name3ar: "Burger", nameAr: "برجر", category: "main", tags: ["meat", "heavy"], image: "", imageKey: "burger", attributes: {} },
-  { id: 2, name3ar: "Salad", nameAr: "سلطة", category: "main", tags: ["vegan", "light"], image: "", imageKey: "salad", attributes: {} },
-  { id: 3, name3ar: "Pizza", nameAr: "بيتزا", category: "main", tags: ["vegetarian", "heavy"], image: "", imageKey: "pizza", attributes: {} },
+  { id: 1, name3ar: "Burger", nameAr: "برجر", mealType: "main", tags: ["heavy"], imageUrl: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=1200&auto=format&fit=crop", attributes: {} },
+  { id: 2, name3ar: "Salad", nameAr: "سلطة", mealType: "appetizer", tags: ["light", "fresh"], imageUrl: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&q=80&w=800", attributes: {} },
+  { id: 3, name3ar: "Pizza", nameAr: "بيتزا", mealType: "main", tags: ["heavy", "comfort"], imageUrl: "https://images.unsplash.com/photo-1564936281291-294551497d81?q=80&w=1200&auto=format&fit=crop", attributes: {} },
 ];
 
 console.log("=== Testing Anti-Repeat Logic ===\n");
@@ -48,7 +48,7 @@ console.log("\n");
 
 // Test 3: Edge case - only one food
 console.log("Test 3: Edge Case (Only One Food Available)");
-const singleFood: Food[] = [{ id: 1, name3ar: "Only Food", nameAr: "طعام", category: "main", tags: ["test"], image: "", imageKey: "only-food", attributes: {} }];
+const singleFood: Food[] = [{ id: 1, name3ar: "Only Food", nameAr: "طعام", mealType: "main", tags: ["comfort"], imageUrl: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800", attributes: {} }];
 const result3 = selectFood({
   foods: singleFood,
   selectedTags: [],

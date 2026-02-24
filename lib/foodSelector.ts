@@ -86,25 +86,30 @@ export function selectFood({
   } else {
     // Filtered Mode: Apply existing filtering logic
 
-    // Apply tag filter (OR logic)
+    // Apply tag and mealType filter (OR logic)
     if (selectedTags.length > 0) {
       candidateFoods = candidateFoods.filter((food) =>
-        selectedTags.some((tag) => food.tags.includes(tag))
+        selectedTags.some((tag) =>
+          food.tags.includes(tag) || (food.mealType as string) === tag
+        )
       );
     }
 
-    // Apply explicit tag exclusions (HARD FILTER)
+    // Apply explicit tag and mealType exclusions (HARD FILTER)
     if (excludedTags && excludedTags.length > 0) {
       candidateFoods = candidateFoods.filter((food) =>
-        !excludedTags.some((tag) => food.tags.includes(tag))
+        !excludedTags.some((tag) =>
+          food.tags.includes(tag) || (food.mealType as string) === tag
+        )
       );
     }
 
-    // Apply AI intent exclusions
+    // Apply AI-driven categorical exclusions (HARD FILTER)
     if (aiIntent?.exclude && aiIntent.exclude.length > 0) {
-      candidateFoods = candidateFoods.filter(
-        (food) => !aiIntent.exclude!.includes(food.category)
-      );
+      candidateFoods = candidateFoods.filter((food) => {
+        const timeOfDay = food.attributes?.timeOfDay || [];
+        return !timeOfDay.some((time) => aiIntent.exclude!.includes(time));
+      });
     }
 
     // Fallback: If no foods match filters, use all foods (preserving existing behavior)
