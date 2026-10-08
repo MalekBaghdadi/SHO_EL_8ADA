@@ -77,8 +77,9 @@ function SwipeCard({
     <motion.article
       className={`card ${top ? "top" : ""}`}
       style={{ x, rotate, zIndex: 10 - depth }}
-      initial={{ scale: 0.88, y: 28, opacity: 0 }}
-      animate={{ scale: 1 - depth * 0.05, y: depth * 16, opacity: depth < 2 ? 1 : 0.7 }}
+      initial={{ scale: 0.9, y: 0, opacity: 0 }}
+      // Back cards sit fully hidden behind the top one; they show only while it is dragged away.
+      animate={{ scale: 1 - depth * 0.04, y: 0, opacity: depth < 2 ? 1 : 0 }}
       exit="exit"
       variants={exitVariants}
       transition={{ type: "spring", stiffness: 300, damping: 28 }}

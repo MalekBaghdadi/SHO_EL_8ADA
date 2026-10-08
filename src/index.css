@@ -14,6 +14,7 @@
   --olive: #4f8a2b;
   --shadow: 0 1px 2px rgb(60 30 0 / 0.06), 0 8px 24px rgb(60 30 0 / 0.08);
   --shadow-lg: 0 2px 6px rgb(60 30 0 / 0.08), 0 24px 60px rgb(60 30 0 / 0.18);
+  --shadow-card: 0 1px 3px rgb(60 30 0 / 0.1), 0 8px 18px rgb(60 30 0 / 0.12);
   --radius: 28px;
   --font-display: "Bricolage Grotesque Variable", system-ui, sans-serif;
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -37,6 +38,7 @@
     --olive: #7fbf4f;
     --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px rgb(0 0 0 / 0.35);
     --shadow-lg: 0 2px 6px rgb(0 0 0 / 0.4), 0 24px 60px rgb(0 0 0 / 0.55);
+    --shadow-card: 0 1px 3px rgb(0 0 0 / 0.4), 0 8px 18px rgb(0 0 0 / 0.4);
     color-scheme: dark;
   }
 }
@@ -222,7 +224,7 @@ a {
   flex: 1;
   min-height: 380px;
   max-height: 620px;
-  margin-bottom: 14px;
+  margin-bottom: 22px;
 }
 
 .card {
@@ -231,7 +233,7 @@ a {
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--surface);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-card);
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
